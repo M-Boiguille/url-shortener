@@ -28,3 +28,6 @@ htmlcov/
 # Divers
 .DS_Store
 *.log
+
+# Notes perso locales (non versionnées)
+perso/
