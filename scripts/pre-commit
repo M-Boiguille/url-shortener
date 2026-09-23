@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Hook pre-commit : bloque le commit si un fichier .env est stagé
+# ou si un fichier contient des espaces en fin de ligne (trailing whitespace).
+
+set -euo pipefail
+
+exit_code=0
+
+# 1) Refuser les fichiers .env / .env.* stagés
+env_files=$(git diff --cached --name-only | grep -E '(^|/)\.env($|\.)' || true)
+if [ -n "$env_files" ]; then
+  echo "Commit bloqué : fichier(s) .env stagé(s) :"
+  echo "$env_files"
+  exit_code=1
+fi
+
+# 2) Refuser le trailing whitespace dans les fichiers ajoutés/modifiés
+while IFS= read -r file; do
+  if grep -n '[[:blank:]]$' "$file" >/dev/null 2>&1; then
+    echo "Commit bloqué : espaces en fin de ligne dans : $file"
+    grep -n '[[:blank:]]$' "$file"
+    exit_code=1
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACM)
+
+exit "$exit_code"
