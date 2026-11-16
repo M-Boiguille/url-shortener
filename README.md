@@ -10,10 +10,18 @@ Terraform/AWS → GitOps → EKS.
 - `GET /healthz` → 200
 
 ## Statut
-Étape 1 — bootstrap du dépôt.
+Étape 1 — bootstrap du dépôt. L'API et son environnement d'exécution seront
+ajoutés au fil des étapes ; les endpoints ci-dessus décrivent la cible.
 
 ## Architecture cible
 > À compléter au fil des étapes (diagramme final à l'étape 20).
 
 ## Lancer
-> À compléter à l'étape 3 (Docker).
+Le lancement local sera documenté à l'étape 3, avec la configuration Docker.
+À ce stade, le dépôt ne contient pas encore d'application exécutable.
+
+## Développement
+- Consultez [`docs/development.md`](docs/development.md) pour le parcours de
+  développement prévu.
+- Consultez [`docs/quality-checklist.md`](docs/quality-checklist.md) pour les
+  vérifications à effectuer avant de valider une étape.
